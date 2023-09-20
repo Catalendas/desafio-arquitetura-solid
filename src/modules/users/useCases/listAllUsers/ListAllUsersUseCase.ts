@@ -9,7 +9,14 @@ class ListAllUsersUseCase {
   constructor(private usersRepository: IUsersRepository) {}
 
   execute({ user_id }: IRequest): User[] {
-    // Complete aqui
+    const user = this.usersRepository.findById(user_id);
+    const users = this.usersRepository.list()
+
+    if (!user.admin) {
+      throw new Error("Você não tem perimição para fazer essa consulta")
+    }
+
+    return users
   }
 }
 

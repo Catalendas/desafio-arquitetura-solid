@@ -1,0 +1,106 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Atlas",
+        "description": "Essa documentação é sobre a api Atlas",
+        "version": "1.0.0",
+        "contact": {
+            "email": "musiccar@outlook.com"
+        }
+    },
+    "paths": {
+        "/users": {
+            "post": {
+                "tags": ["Users"],
+                "summary": "Cadastra um novo usuario",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    }
+                                },
+                                "exemple": {
+                                    "name": "Exemplo de nome de usuario",
+                                    "email": "Exemplo de email de usuario"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Usuario criado"
+                    },
+                    "500": {
+                        "description": "Usuario já existe"
+                    }
+                }
+            },
+            "get": {
+                "tags": ["Users"],
+                "summary": "Retorna uma lsita de usuarios",
+                "description": "Somente usuarios adimin podem acessar",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "user_id",
+                        "schema": {
+                            "user_id": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Operação realizada com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "e9164be2-19e2-41a2-b498-779f24276aeb"
+                                        },
+                                        "admin": {
+                                            "type": "boolean",
+                                            "exemple": "false"
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Marcos"
+                                        },
+                                        "email": {
+                                            "type": "string",
+                                            "example": "exemplo@gmail.com"
+                                        },
+                                        "created_at": {
+                                            "type": "date",
+                                            "example": "2023-09-19T23:03:43.227Z"
+                                        },
+                                        "updated_at": {
+                                            "type": "date",
+                                            "example": "2023-09-19T23:03:43.227Z"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Você não tem perimição para fazer essa consulta"
+                    }
+                }
+            }
+        }
+    
+    }
+}
